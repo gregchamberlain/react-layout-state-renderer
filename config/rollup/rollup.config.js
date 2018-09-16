@@ -1,5 +1,6 @@
 import commonjs from 'rollup-plugin-commonjs';
-import pkg from './package.json';
+import pkg from '../../package.json';
+import replace from 'rollup-plugin-replace';
 import resolve from 'rollup-plugin-node-resolve';
 import sourcemaps from 'rollup-plugin-sourcemaps';
 
@@ -11,20 +12,33 @@ const onwarn = (message) => {
   }
 };
 
+const exportName = pkg.name
+  .split('-')
+  .map((word) => word[0].toUpperCase() + word.slice(1))
+  .join('');
+
 export default [
   {
     input: 'lib/index.js',
-    external: ['react'],
+    external: ['react', 'react-dom'],
     output: {
       file: pkg.browser,
       format: 'umd',
-      name: 'ReactLayoutStateRenderer',
+      name: exportName,
       sourcemap: true,
       globals: {
         react: 'React',
+        'react-dom': 'ReactDOM',
       },
     },
-    plugins: [resolve(), commonjs(), sourcemaps()],
+    plugins: [
+      resolve(),
+      commonjs(),
+      sourcemaps(),
+      replace({
+        'process.env.NODE_ENV': JSON.stringify('production'),
+      }),
+    ],
     onwarn,
   },
   {

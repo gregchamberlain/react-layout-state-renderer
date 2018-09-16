@@ -1,25 +1,58 @@
 {
   "name": "react-layout-state-renderer",
   "version": "0.1.0",
+  "license": "MIT",
   "main": "dist/react-layout-state-renderer.cjs.js",
   "module": "lib/index.js",
   "browser": "dist/react-layout-state-renderer.umd.js",
   "typings": "lib/index.d.ts",
-  "scripts": {
-    "build": "rimraf lib/ dist/ && tsc && rollup -c",
-    "prepublish": "yarn build"
+  "bugs": {
+    "url": "https://github.com/gregchamberlain/react-layout-state-renderer/issues"
   },
-  "peerDependencies": {
-    "react": "^16.5.0"
+  "homepage": "https://github.com/gregchamberlain/react-layout-state-renderer#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gregchamberlain/react-layout-state-renderer.git"
+  },
+  "scripts": {
+    "test": "jest",
+    "build": "rimraf lib/ dist/ && tsc && rollup -c config/rollup/rollup.config.js"
   },
   "devDependencies": {
-    "@types/react": "^16.4.13",
+    "@types/enzyme": "^3.1.14",
+    "@types/enzyme-adapter-react-16": "^1.0.3",
+    "@types/jest": "^23.3.2",
+    "@types/react": "^16.4.14",
+    "enzyme": "^3.6.0",
+    "enzyme-adapter-react-16": "^1.5.0",
+    "jest": "^23.6.0",
+    "react-dom": "^16.5.1",
     "rimraf": "^2.6.2",
     "rollup": "^0.65.2",
     "rollup-plugin-commonjs": "^9.1.6",
     "rollup-plugin-node-resolve": "^3.4.0",
+    "react": "^16.5.1",
     "rollup-plugin-replace": "^2.0.0",
-    "rollup-plugin-uglify": "^5.0.2",
+    "rollup-plugin-sourcemaps": "^0.4.2",
+    "ts-jest": "^23.1.4",
     "typescript": "^3.0.3"
+  },
+  "jest": {
+    "setupTestFrameworkScriptFile": "<rootDir>/config/jest/setupTests.ts",
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  },
+  "peerDependencies": {
+    "react": "^16.5.1"
   }
 }
