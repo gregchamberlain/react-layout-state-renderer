@@ -1,17 +1,20 @@
 {
   "name": "react-layout-state-renderer",
   "version": "0.1.0",
-  "main": "lib/react-layout-state-renderer.umd.js",
+  "main": "dist/react-layout-state-renderer.cjs.js",
   "module": "lib/index.js",
+  "browser": "dist/react-layout-state-renderer.umd.js",
   "typings": "lib/index.d.ts",
   "scripts": {
-    "build": "tsc && rollup -c"
+    "build": "rimraf lib/ dist/ && tsc && rollup -c",
+    "prepublish": "yarn build"
   },
-  "dependencies": {
+  "peerDependencies": {
     "react": "^16.5.0"
   },
   "devDependencies": {
     "@types/react": "^16.4.13",
+    "rimraf": "^2.6.2",
     "rollup": "^0.65.2",
     "rollup-plugin-commonjs": "^9.1.6",
     "rollup-plugin-node-resolve": "^3.4.0",

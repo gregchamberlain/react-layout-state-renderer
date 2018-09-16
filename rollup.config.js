@@ -1,17 +1,39 @@
 import commonjs from 'rollup-plugin-commonjs';
-import node from 'rollup-plugin-node-resolve';
-import { uglify } from 'rollup-plugin-uglify';
-import replace from 'rollup-plugin-replace';
+import pkg from './package.json';
+import resolve from 'rollup-plugin-node-resolve';
+import sourcemaps from 'rollup-plugin-sourcemaps';
+
+const onwarn = (message) => {
+  const suppressed = ['UNRESOLVED_IMPORT', 'THIS_IS_UNDEFINED'];
+
+  if (!suppressed.find((code) => message.code === code)) {
+    return console.warn(message.message);
+  }
+};
 
 export default [
   {
     input: 'lib/index.js',
+    external: ['react'],
     output: {
-      file: 'lib/react-layout-state-renderer.umd.js',
+      file: pkg.browser,
       format: 'umd',
-      name: 'react-layout-state-renderer',
+      name: 'ReactLayoutStateRenderer',
       sourcemap: true,
-      exports: 'named',
+      globals: {
+        react: 'React',
+      },
     },
+    plugins: [resolve(), commonjs(), sourcemaps()],
+    onwarn,
+  },
+  {
+    input: 'lib/index.js',
+    output: {
+      file: pkg.main,
+      format: 'cjs',
+    },
+    plugins: [commonjs()],
+    onwarn,
   },
 ];
