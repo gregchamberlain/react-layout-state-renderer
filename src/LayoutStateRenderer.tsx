@@ -28,13 +28,13 @@ type ComponentMap = {
 type Props = {
   rootKey: string;
   layoutState: LayoutState;
-  components: ComponentMap;
+  components?: ComponentMap;
 };
 
 const LayoutStateRenderer: React.StatelessComponent<Props> = ({
   rootKey,
   layoutState,
-  components,
+  components = {},
 }) => {
   const item = layoutState[rootKey];
   const type = components[item.type] || item.type;
