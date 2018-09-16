@@ -19,13 +19,15 @@ const exportName = pkg.name
 export default [
   {
     input: 'lib/index.js',
-    external: [],
+    external: ['react'],
     output: {
       file: pkg.browser,
       format: 'umd',
       name: exportName,
       sourcemap: true,
-      globals: {},
+      globals: {
+        react: 'React',
+      },
     },
     plugins: [resolve(), commonjs(), sourcemaps()],
     onwarn,
