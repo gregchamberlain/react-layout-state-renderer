@@ -11,18 +11,25 @@
     "build": "rimraf lib/ dist/ && tsc && rollup -c"
   },
   "devDependencies": {
+    "@types/enzyme": "^3.1.14",
+    "@types/enzyme-adapter-react-16": "^1.0.3",
     "@types/jest": "^23.3.2",
     "@types/react": "^16.4.14",
+    "enzyme": "^3.6.0",
+    "enzyme-adapter-react-16": "^1.5.0",
     "jest": "^23.6.0",
+    "react-dom": "^16.5.1",
     "rimraf": "^2.6.2",
     "rollup": "^0.65.2",
     "rollup-plugin-commonjs": "^9.1.6",
     "rollup-plugin-node-resolve": "^3.4.0",
+    "react": "^16.5.1",
     "rollup-plugin-sourcemaps": "^0.4.2",
     "ts-jest": "^23.1.4",
     "typescript": "^3.0.3"
   },
   "jest": {
+    "setupTestFrameworkScriptFile": "<rootDir>/config/jest/setupTests.ts",
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
     },
@@ -35,5 +42,8 @@
       "json",
       "node"
     ]
+  },
+  "peerDependencies": {
+    "react": "^16.5.1"
   }
 }
